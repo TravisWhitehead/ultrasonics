@@ -448,8 +448,8 @@ def run(settings_dict, **kwargs):
                     raise Exception(
                         f"Unexpected response while updating playlist: {response}")
 
-                existing_tracks = []
-                existing_ids = []
+            existing_tracks = []
+            existing_ids = []
 
             # Get all tracks already in the playlist
             if "existing_tracks" not in vars():
