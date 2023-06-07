@@ -448,8 +448,8 @@ def run(settings_dict, **kwargs):
                     raise Exception(
                         f"Unexpected response while updating playlist: {response}")
 
-            existing_tracks = []
-            existing_ids = []
+                existing_tracks = []
+                existing_ids = []
 
             # Get all tracks already in the playlist
             if "existing_tracks" not in vars():
@@ -457,7 +457,9 @@ def run(settings_dict, **kwargs):
                 existing_ids = [str(item["id"]["deezer"])
                                 for item in existing_tracks]
                 s_existing_ids = str(existing_ids)
-                print(s_existing_ids)
+                s_existing_tracks = str(existing_tracks)
+                print("existing ids:" + s_existing_ids)
+                print("existing tracks:" + s_existing_tracks)
 
             # Add songs which don't already exist in the playlist
             new_ids = []
@@ -508,7 +510,7 @@ def run(settings_dict, **kwargs):
             # Remove duplicates from the list of new ids
             new_ids = list(set(new_ids))
             s_new_ids = str(new_ids)
-            print(s_new_ids)
+            print("new ids: " + s_new_ids)
 
             # Add tracks to playlist in batches of 100
             url = f"https://api.deezer.com/playlist/{playlist_id}/tracks"
