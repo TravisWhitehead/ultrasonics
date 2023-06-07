@@ -402,7 +402,7 @@ def run(settings_dict, **kwargs):
 
     else:
         "Outputs mode"
-
+        log.debug("TESTDAAN")
         # Get a list of current user playlists
         current_playlists = dz.list_playlists()
 
