@@ -406,9 +406,6 @@ def run(settings_dict, **kwargs):
         current_playlists = dz.list_playlists()
 
         for playlist in songs_dict:
-            s_playlist = str(playlist)
-            log.debug(s_playlist)
-            
             # Check the playlist already exists in Deezer
             playlist_id = ""
             try:
@@ -435,6 +432,7 @@ def run(settings_dict, **kwargs):
                 playlist_id = dz.api(url, method="POST", data=data)["id"]
 
                 public = "true" if database["created_playlists"] == "Public" else "false"
+                debug.log("DESCRIPTION: " + playlist["description"])
                 description = playlist["description"]
 
                 url = f"https://api.deezer.com/playlist/{playlist_id}"
