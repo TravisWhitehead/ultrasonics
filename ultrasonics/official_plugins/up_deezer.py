@@ -402,11 +402,13 @@ def run(settings_dict, **kwargs):
 
     else:
         "Outputs mode"
-        log.debug("TESTDAAN")
         # Get a list of current user playlists
         current_playlists = dz.list_playlists()
 
         for playlist in songs_dict:
+            s_playlist = str(playlist)
+            log.debug(s_playlist)
+            
             # Check the playlist already exists in Deezer
             playlist_id = ""
             try:
@@ -456,8 +458,6 @@ def run(settings_dict, **kwargs):
             existing_tracks = dz.playlist_tracks(playlist_id)
             existing_ids = [str(item["id"]["deezer"])
                             for item in existing_tracks]
-            s_existing_ids = str(existing_ids)
-            log.debug("existing ids:" + s_existing_ids)
 
             # Add songs which don't already exist in the playlist
             new_ids = []
@@ -506,11 +506,7 @@ def run(settings_dict, **kwargs):
                     dz.remove_tracks_from_playlist(playlist_id, remove_ids)
 
             # Remove duplicates from the list of new ids
-            s_new_ids_b = str(new_ids)
-            log.debug("new ids BEFORE: " + s_new_ids_b)
             new_ids = list(set(new_ids))
-            s_new_ids = str(new_ids)
-            log.debug("new ids AFTER: " + s_new_ids)
 
             # Add tracks to playlist in batches of 100
             url = f"https://api.deezer.com/playlist/{playlist_id}/tracks"
