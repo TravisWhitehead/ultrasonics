@@ -491,7 +491,7 @@ def run(settings_dict, **kwargs):
                     new_ids.append(str(deezer_id))
                 else:
                     log.debug(
-                        f"Could not find song {song['title']} in Deezer; will not add to playlist.")
+                        f"Could not find song {song} in Deezer; will not add to playlist.")
 
             if settings_dict["existing_playlists"] == "Update":
                 # Remove any songs which aren't in `uris` from the playlist
