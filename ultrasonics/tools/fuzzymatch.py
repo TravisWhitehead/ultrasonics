@@ -21,7 +21,7 @@ XDGFX, 2020
 
 import re
 
-from fuzzywuzzy import fuzz, process
+from rapidfuzz import fuzz, process
 
 from ultrasonics import logs
 
