@@ -541,26 +541,26 @@ def run(settings_dict, **kwargs):
             # 1. Get a list of users playlists
             playlists = s.current_user_playlists()
             
-            s_playlists = str(playlists)
-            log.debug("Spotify playlists: " + s_playlists)
-
             songs_dict = []
 
             for playlist in playlists:
-                item = {"name": playlist["name"], "id": {"spotify": playlist["id"]}}
+                item = {"name": playlist["name"], "description": playlist["description"], "id": {"spotify": playlist["id"]}}
 
                 songs_dict.append(item)
 
             # 2. Filter playlist titles
             songs_dict = name_filter.filter(songs_dict, settings_dict["filter"])
-
+            
+            s_playlists = str(songs_dict)
+            log.debug("Spotify songs_dict: " + s_playlists)
+            
             # 3. Fetch songs from each playlist, build songs_dict
             log.info("Building songs_dict for playlists...")
             for i, playlist in tqdm(enumerate(songs_dict)):
                 tracks = s.playlist_tracks(playlist["id"]["spotify"])
 
                 songs_dict[i]["songs"] = tracks
-
+                
             return songs_dict
 
         elif settings_dict["mode"] == "saved":
