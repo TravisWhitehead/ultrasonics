@@ -435,7 +435,7 @@ def run(settings_dict, **kwargs):
                 playlist_id = dz.api(url, method="POST", data=data)["id"]
 
                 public = "true" if database["created_playlists"] == "Public" else "false"
-                description = "Created automatically by ultrasonics with 💖"
+                description = playlist["description"]
 
                 url = f"https://api.deezer.com/playlist/{playlist_id}"
                 data = {
