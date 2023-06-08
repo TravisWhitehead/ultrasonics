@@ -540,6 +540,9 @@ def run(settings_dict, **kwargs):
 
             # 1. Get a list of users playlists
             playlists = s.current_user_playlists()
+            
+            s_playlists = str(playlists)
+            log.debug("Spotify playlists: " + s_playlists)
 
             songs_dict = []
 
