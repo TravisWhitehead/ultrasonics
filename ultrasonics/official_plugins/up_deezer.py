@@ -129,7 +129,7 @@ def run(settings_dict, **kwargs):
 
             try:
                 if r.json().get("error"):
-                    log.error(f"An error was returned from the Deezer API.")
+                    log.error(f"\nAn error was returned from the Deezer API.")
                     log.warning(f"{r.json()['error']}")
             except AttributeError:
                 # Returned data is not in JSON format
@@ -172,19 +172,15 @@ def run(settings_dict, **kwargs):
                 # If ISRC exists, only use that query
                 url = f"https://api.deezer.com/2.0/track/isrc:{track['isrc']}"
                 resp = self.api(url)
-                
-                #str_resp = str(resp)
-                #log.debug(f"DEBUG DEEZER | RESPONSE: {str_resp}")
-                
+                                
                 if resp.get("error"):
-                    log.debug(f"DEBUG DEEZER | ERROR FROM ISRC")
                     # ISRC was not found in Deezer
+                    log.info(f"ISRC not found in Deezer, searching for other fields")
                     raise KeyError
 
                 results_list.append(self.deezer_to_songs_dict(track=resp))
 
             except KeyError:
-                log.debug(f"DEBUG DEEZER | KEYERROR FOUND")
                 # If no ISRC, try all additional queries
                 queries = []
                 try:
@@ -222,7 +218,7 @@ def run(settings_dict, **kwargs):
 
                 for query in queries:
                     str_query = str(query)
-                    log.debug(f"Query info: {str_query}")
+                    log.info(f"Searching for {str_query}")
                     
                     params = {
                         "q": query,
