@@ -142,6 +142,8 @@ def run(settings_dict, **kwargs):
                 pass
 
             return r.json()
+            str_json = r.json()
+            log.debug(f"DEEZER DEBUG | JSON: {str_json}")
 
         def search(self, track):
             """
@@ -165,7 +167,6 @@ def run(settings_dict, **kwargs):
                 return deezer_id, confidence
 
             except KeyError:
-                log.debug(f"DEBUG DEEZER | Deezer ID fail")
                 # Deezer ID was not supplied
                 pass
 
