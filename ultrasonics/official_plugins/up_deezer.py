@@ -169,7 +169,6 @@ def run(settings_dict, **kwargs):
             results_list = []
 
             try:
-                log.debug(f"DEBUG DEEZER | Trying Deezer ISRC")
                 # If ISRC exists, only use that query
                 url = f"https://api.deezer.com/2.0/track/isrc:{track['isrc']}"
                 resp = self.api(url)
