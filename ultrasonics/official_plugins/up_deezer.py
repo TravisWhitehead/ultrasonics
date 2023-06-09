@@ -130,12 +130,12 @@ def run(settings_dict, **kwargs):
             try:
                 if r.json().get("error"):
                     log.error(f"An error was returned from the Deezer API.")
-                    str_url = str(url)
-                    str_params = str(params)
-                    str_resp = str(r)
-                    log.debug(f"DEEZER DEBUG | URL: {str_url}")
-                    log.debug(f"DEEZER DEBUG | URL: {str_params}")
-                    log.debug(f"DEEZER DEBUG | URL: {str_resp}")
+                    #str_url = str(url)
+                    #str_params = str(params)
+                    #str_resp = str(r)
+                    #log.debug(f"DEEZER DEBUG | URL: {str_url}")
+                    #log.debug(f"DEEZER DEBUG | URL: {str_params}")
+                    #log.debug(f"DEEZER DEBUG | URL: {str_resp}")
                     raise UserWarning(r.json()["error"])
             except AttributeError:
                 # Returned data is not in JSON format
@@ -165,7 +165,7 @@ def run(settings_dict, **kwargs):
                 return deezer_id, confidence
 
             except KeyError:
-                log.debug("DEBUG DEEZER | Deezer ID fail")
+                log.debug(f"DEBUG DEEZER | Deezer ID fail")
                 # Deezer ID was not supplied
                 pass
 
@@ -176,10 +176,13 @@ def run(settings_dict, **kwargs):
             results_list = []
 
             try:
-                log.debug("DEBUG DEEZER | Trying Deezer ISRC")
+                log.debug(f"DEBUG DEEZER | Trying Deezer ISRC")
                 # If ISRC exists, only use that query
                 url = f"https://api.deezer.com/2.0/track/isrc:{track['isrc']}"
                 resp = self.api(url)
+                
+                str_resp = str(resp)
+                log.debug(f"DEBUG DEEZER | RESPONSE: {str_resp}")
 
                 if resp.get("error"):
                     # ISRC was not found in Deezer
