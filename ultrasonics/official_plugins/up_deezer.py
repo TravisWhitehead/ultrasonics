@@ -136,16 +136,16 @@ def run(settings_dict, **kwargs):
                     #log.debug(f"DEEZER DEBUG | URL: {str_url}")
                     #log.debug(f"DEEZER DEBUG | URL: {str_params}")
                     #log.debug(f"DEEZER DEBUG | URL: {str_resp}")
-                    str_json = r.json()
+                    str_json = str(r.json())
                     log.debug(f"DEEZER DEBUG | JSON: {str_json}")
                     raise UserWarning(r.json()["error"])
             except AttributeError:
                 # Returned data is not in JSON format
                 pass
 
-            return r.json()
-            str_json = r.json()
+            str_json = str(r.json())
             log.debug(f"DEEZER DEBUG | JSON: {str_json}")
+            return r.json()
 
         def search(self, track):
             """
