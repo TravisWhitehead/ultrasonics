@@ -10,7 +10,6 @@ XDGFX, 2020
 """
 
 import json
-
 import os
 import re
 import time
@@ -131,7 +130,7 @@ def run(settings_dict, **kwargs):
             try:
                 if r.json().get("error"):
                     log.error(f"An error was returned from the Deezer API.")
-                    log.error(f"ERROR | {r.json().get('error')}")
+                    log.error(f"ERROR | " + r.json())
                     #raise UserWarning(r.json()["error"])
                     #return r.json()
             except AttributeError:
