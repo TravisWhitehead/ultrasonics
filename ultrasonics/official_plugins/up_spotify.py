@@ -545,14 +545,10 @@ def run(settings_dict, **kwargs):
 
             for playlist in playlists:
                 item = {"name": playlist["name"], "description": playlist["description"], "id": {"spotify": playlist["id"]}}
-
                 songs_dict.append(item)
 
             # 2. Filter playlist titles
             songs_dict = name_filter.filter(songs_dict, settings_dict["filter"])
-            
-            s_playlists = str(songs_dict)
-            log.debug("Spotify songs_dict: " + s_playlists)
             
             # 3. Fetch songs from each playlist, build songs_dict
             log.info("Building songs_dict for playlists...")
