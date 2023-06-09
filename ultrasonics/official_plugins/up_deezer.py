@@ -175,6 +175,8 @@ def run(settings_dict, **kwargs):
 
                 if resp.get("error"):
                     # ISRC was not found in Deezer
+                    str_err = str(resp)
+                    log.debug(f"DEBUG DEEZER ERROR: {str_err}")
                     raise KeyError
 
                 results_list.append(self.deezer_to_songs_dict(track=resp))
