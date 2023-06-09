@@ -238,10 +238,13 @@ def run(settings_dict, **kwargs):
                 return "", 0
 
             # Check results with fuzzy matching
-            confidence = 0
-
             for item in results_list:
+                confidence = 0
                 score = fuzzymatch.similarity(track, item)
+                
+                str_item = str(item)
+                log.info(f"Result: {str_item} has score: {score}")
+                
                 if score > confidence:
                     matched_track = item
                     confidence = score
