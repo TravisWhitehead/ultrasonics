@@ -131,6 +131,7 @@ def run(settings_dict, **kwargs):
                 if r.json().get("error"):
                     log.error(f"An error was returned from the Deezer API.")
                     raise UserWarning(r.json()["error"])
+                    return r.json()
             except AttributeError:
                 # Returned data is not in JSON format
                 pass
