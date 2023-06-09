@@ -159,6 +159,7 @@ def run(settings_dict, **kwargs):
                 return deezer_id, confidence
 
             except KeyError:
+                log.debug("DEBUG DEEZER | Deezer ID fail")
                 # Deezer ID was not supplied
                 pass
 
@@ -169,14 +170,16 @@ def run(settings_dict, **kwargs):
             results_list = []
 
             try:
+                log.debug("DEBUG DEEZER | Trying Deezer ISRC")
                 # If ISRC exists, only use that query
                 url = f"https://api.deezer.com/2.0/track/isrc:{track['isrc']}"
                 resp = self.api(url)
+                
+                str_resp = str(resp)
+                log.debug("DEBUG DEEZER | RESPONSE: " + str_resp)
 
                 if resp.get("error"):
                     # ISRC was not found in Deezer
-                    str_err = str(resp)
-                    log.debug(f"DEBUG DEEZER ERROR: {str_err}")
                     raise KeyError
 
                 results_list.append(self.deezer_to_songs_dict(track=resp))
