@@ -130,7 +130,7 @@ def run(settings_dict, **kwargs):
             try:
                 if r.json().get("error"):
                     log.error(f"An error was returned from the Deezer API.")
-                    log.error(f"ERROR | " + r.json())
+                    log.error(f"ERROR | {r.text}")
                     #raise UserWarning(r.json()["error"])
                     #return r.json()
             except AttributeError:
