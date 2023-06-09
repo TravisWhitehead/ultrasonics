@@ -142,7 +142,7 @@ def run(settings_dict, **kwargs):
             except AttributeError:
                 # Returned data is not in JSON format
                 pass
-
+            
             return r.json()
 
         def search(self, track):
