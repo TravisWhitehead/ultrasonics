@@ -143,8 +143,6 @@ def run(settings_dict, **kwargs):
                 # Returned data is not in JSON format
                 pass
 
-            str_json = r.text
-            log.debug(f"DEEZER DEBUG | RESPONSE END: {str_json}")
             return r.json()
 
         def search(self, track):
