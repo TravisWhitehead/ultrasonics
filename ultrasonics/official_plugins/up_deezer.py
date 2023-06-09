@@ -173,11 +173,9 @@ def run(settings_dict, **kwargs):
                 url = f"https://api.deezer.com/2.0/track/isrc:{track['isrc']}"
                 resp = self.api(url)
                 
-                print(vars(resp))
                 #str_resp = str(resp)
                 #log.debug(f"DEBUG DEEZER | RESPONSE: {str_resp}")
                 
-
                 if resp.get("error"):
                     log.debug(f"DEBUG DEEZER | ERROR FROM ISRC")
                     # ISRC was not found in Deezer
