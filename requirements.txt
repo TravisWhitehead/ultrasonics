@@ -6,7 +6,7 @@ eventlet~=0.33.3
 # Included Plugins
 mutagen~=1.46.0
 requests~=2.31.0
-fuzzywuzzy~=0.18.0
+rapidfuzz~=3.1.1
 python-Levenshtein~=0.21.0
 spotipy~=2.23.0
 tqdm~=4.65.0
