@@ -175,6 +175,7 @@ def run(settings_dict, **kwargs):
                 
                 #str_resp = str(resp)
                 #log.debug(f"DEBUG DEEZER | RESPONSE: {str_resp}")
+                print vars(resp)
 
                 if resp.get("error"):
                     log.debug(f"DEBUG DEEZER | ERROR FROM ISRC")
