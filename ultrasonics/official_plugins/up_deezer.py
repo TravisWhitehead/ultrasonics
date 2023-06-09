@@ -216,10 +216,9 @@ def run(settings_dict, **kwargs):
                 url = "https://api.deezer.com/search"
 
                 for query in queries:
-                    if track['isrc'] == "BEHP42300013"
+                    if track['isrc'] == "BEHP42300013":
                         str_query = str(query)
-                        log.debug(
-                            f"Query info: {str_query}")
+                        log.debug(f"Query info: {str_query}")
                     
                     params = {
                         "q": query,
