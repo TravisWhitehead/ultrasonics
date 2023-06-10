@@ -544,8 +544,10 @@ def run(settings_dict, **kwargs):
             songs_dict = []
 
             for playlist in playlists:
-                item = {"name": playlist["name"], "description": playlist["description"], "id": {"spotify": playlist["id"]}}
+                item = {"name": playlist["name"][0:50], "description": playlist["description"], "id": {"spotify": playlist["id"]}}
                 songs_dict.append(item)
+                str_item = str(item)
+                log.debug(f"Spotify playlist added: \n {str_item}")
 
             # 2. Filter playlist titles
             songs_dict = name_filter.filter(songs_dict, settings_dict["filter"])
