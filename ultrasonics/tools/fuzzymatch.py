@@ -166,7 +166,7 @@ def similarity(a, b):
                 cutoff_regex[1], " ", cleaned_b, flags=re.IGNORECASE).strip().lower()
 
             results[key] = fuzz.ratio(cleaned_a, cleaned_b)
-            if cleaned_a == "call me":
+            if cleaned_b == "call me":
                 log.debug(f"Compared \n {cleaned_a} \n with \n {cleaned_b} \n Score {results[key]}")
 
         except KeyError:
@@ -199,7 +199,7 @@ def similarity(a, b):
 
     # Fix weightings if values are missing
     str_results = str(results)
-    if cleaned_a == "call me":
+    if cleaned_b == "call me":
         log.debug(f"Results: \n {str_results}")
     
     corrector = 0
