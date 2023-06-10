@@ -257,6 +257,7 @@ def run(settings_dict, **kwargs):
                         break
 
             deezer_id = matched_track["id"]["deezer"]
+            log.info(f"Result: {str_item} has score: {score} and confidence = {confidence}")
 
             return deezer_id, confidence
 
