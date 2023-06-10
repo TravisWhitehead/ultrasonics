@@ -248,7 +248,7 @@ def run(settings_dict, **kwargs):
                 score = fuzzymatch.similarity(track, item)
                 
                 str_item = str(item)
-                log.info(f"Result: {str_item} has score: {score}")
+                log.info(f"Result: {str_item} has score: {score} and confidence = {confidence}")
                 
                 if score > confidence:
                     matched_track = item
