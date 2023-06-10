@@ -199,14 +199,17 @@ def similarity(a, b):
 
     # Fix weightings if values are missing
     str_results = str(results)
-    if cleaned_b == "call me":
-        log.debug(f"Results: \n {str_results}")
     
     corrector = 0
     for key in weight.keys():
         if key in results.keys():
             corrector += weight[key]
-
+            
+    if cleaned_b == "call me":
+        log.debug(f"Results: \n {str_results}")
+        str_weight = str(weight)
+        log.debug(f"Weight: \n {str_weight}")
+    
     if corrector == 0:
         return False
 
