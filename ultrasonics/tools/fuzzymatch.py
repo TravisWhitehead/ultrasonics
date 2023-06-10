@@ -82,7 +82,6 @@ def duplicate(song, song_list, threshold):
                 str_b = str(b)
                 
                 results[key] = fuzz.ratio(a, b)
-                log.debug(f"Compared \n {str_a} \n with \n {str_b} \n Score {results[key]}")
 
         # Date score
         if "date" in song:
