@@ -232,7 +232,7 @@ def run(settings_dict, **kwargs):
                     # Convert to ultrasonics format and append to results_list
                     for result in results:
                         str_result = str(result)
-                        log.debug(f"Deezer result: \n {str_result}")
+                        #log.debug(f"Deezer result: \n {str_result}")
                         
                         result = self.deezer_to_songs_dict(result=result)
                         if result not in results_list:
