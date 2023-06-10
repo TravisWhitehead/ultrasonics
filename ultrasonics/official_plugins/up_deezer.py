@@ -429,6 +429,8 @@ def run(settings_dict, **kwargs):
                 # Playlist must be created
                 log.info(
                     f"Playlist {playlist['name']} does not exist, creating it now...")
+                str_current = str(current_playlists)
+                log.debug(f"Current Playlists: \n {str_current}")
 
                 url = "https://api.deezer.com/user/me/playlists"
                 data = {
