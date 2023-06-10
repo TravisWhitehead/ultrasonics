@@ -147,8 +147,8 @@ def run(settings_dict, **kwargs):
             """
 
             cutoff_regex = [
-                "[([](feat|ft|featuring|original|prod).+?[)\]]",
-                "[ (\- )\-]+(feat|ft|featuring|original|prod).+?(?=[(\n])"
+                "[([](feat|ft|featuring|original|prod|with).+?[)\]]",
+                "[ (\- )\-]+(feat|ft|featuring|original|prod|with).+?(?=[(\n])"
             ]
 
             # 1. Deezer ID
