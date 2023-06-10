@@ -186,11 +186,11 @@ def run(settings_dict, **kwargs):
                 try:
                     title = re.sub(cutoff_regex[0], "",
                                    track['title'], flags=re.IGNORECASE) + "\n"
-                    log.debug(f"DEBUG | TITLE FIRST: \n {title]")
+                    log.debug(f"DEBUG | TITLE FIRST: \n {title}")
 
                     title = re.sub(cutoff_regex[1], " ",
                                    title, flags=re.IGNORECASE).strip()
-                    log.debug(f"DEBUG | TITLE SECOND: \n {title]")
+                    log.debug(f"DEBUG | TITLE SECOND: \n {title}")
                 except KeyError:
                     pass
 
