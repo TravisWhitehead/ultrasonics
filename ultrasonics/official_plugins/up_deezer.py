@@ -170,7 +170,7 @@ def run(settings_dict, **kwargs):
 
             try:
                 # If ISRC exists, only use that query
-                url = f"https://api.deezer.com/2.0/track/isrc:{track['isrc']}"
+                url = f"https://api.deezer.com/track/isrc:{track['isrc']}"
                 resp = self.api(url)
                                 
                 if resp.get("error"):
@@ -222,13 +222,16 @@ def run(settings_dict, **kwargs):
                     
                     params = {
                         "q": query,
-                        "limit": 20
+                        "limit": 50
                     }
 
                     results = self.api(url, params=params)["data"]
 
                     # Convert to ultrasonics format and append to results_list
                     for result in results:
+                        str_result = str(result)
+                        log.debug(f"Deezer result: \n {str_result}")
+                        
                         result = self.deezer_to_songs_dict(result=result)
                         if result not in results_list:
                             results_list.append(result)
@@ -429,8 +432,6 @@ def run(settings_dict, **kwargs):
                 # Playlist must be created
                 log.info(
                     f"Playlist {playlist['name']} does not exist, creating it now...")
-                str_current = str(current_playlists)
-                log.debug(f"Current Playlists: \n {str_current}")
 
                 url = "https://api.deezer.com/user/me/playlists"
                 data = {
