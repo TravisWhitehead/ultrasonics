@@ -29,8 +29,8 @@ log = logs.create_log(__name__)
 
 # List of words and patterns to ignore when testing similarity
 cutoff_regex = [
-    "[([](feat|ft|featuring|original|prod).+?[)\]]",
-    "[ (\- )\-]+(feat|ft|featuring|original|prod).+?(?=[(\n])"
+    "[([](feat|ft|featuring|original|prod|with).+?[)\]]",
+    "[ (\- )\-]+(feat|ft|featuring|original|prod|with).+?(?=[(\n])"
 ]
 
 
