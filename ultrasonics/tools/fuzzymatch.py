@@ -189,13 +189,23 @@ def similarity(a, b):
         except KeyError:
             pass
 
-    weight = {
-        "isrc": 10,
-        "title": 8,
-        "artist": 8,
-        "album": 2,
-        "date": 1
-    }
+    
+    if isrc_match == true:
+        weight = {
+            "isrc": 10,
+            "title": 3,
+            "artist": 3,
+            "album": 1,
+            "date": 1
+        }
+    else:
+        weight = {
+            "isrc": 1,
+            "title": 8,
+            "artist": 8,
+            "album": 2,
+            "date": 1
+        }
 
     # Fix weightings if values are missing
     str_results = str(results)
