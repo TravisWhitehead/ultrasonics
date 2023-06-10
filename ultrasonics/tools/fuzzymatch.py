@@ -78,8 +78,11 @@ def duplicate(song, song_list, threshold):
                            flags=re.IGNORECASE) + "\n"
                 b = re.sub(cutoff_regex[1], " ", b,
                            flags=re.IGNORECASE).strip()
-
+                str_a = str(a)
+                str_b = str(b)
+                
                 results[key] = fuzz.ratio(a, b)
+                log.debug(f"Compared \n {str_a} \n with \n {str_b} \n Score {results[key]}")
 
         # Date score
         if "date" in song:
