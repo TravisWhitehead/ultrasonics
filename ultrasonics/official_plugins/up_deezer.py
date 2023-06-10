@@ -421,7 +421,7 @@ def run(settings_dict, **kwargs):
             except KeyError:
                 if playlist["name"] in [item["title"] for item in current_playlists]:
                     playlist_id = [
-                        item["id"] for item in current_playlists if item["title"] == playlist["name"][0:50]][0]
+                        item["id"] for item in current_playlists if item["title"] == playlist["name"]][0]
             if playlist_id:
                 log.info(
                     f"Playlist {playlist['name']} already exists, updating that one.")
