@@ -174,25 +174,33 @@ def run(settings_dict, **kwargs):
             #         cutoff_regex[1], " ", album, flags=re.IGNORECASE
             #     ).strip()
             #
-            # if "title" in locals() and "album" in locals():
+            # if "title" in track and "album" in track:
             #     queries.append(f"{title} {album}")
 
-            if "title" in locals():
+            if "title" in track:
                 if "artists" in track:
                     for artist in track["artists"]:
                         queries.append(f"{title} {artist}")
-                else:
                     queries.append(title)
 
             results_list = []
 
+            # Search albums
+            if "album" in track:
+                for result in self.request(self.session.search, track["album"], models=[tidalapi.album.Album])['albums']:
+                    for item in result.items():
+                        if isinstance(item, tidalapi.media.Track):
+                            item = s.tidal_to_songs_dict(item)
+                            if item not in results_list:
+                                results_list.append(item)
+
             # Execute all queries
             for query in queries:
-                results = self.request(self.session.search, query)
+                results = self.request(self.session.search, query, models=[tidalapi.media.Track])
 
                 # Convert to ultrasonics format and append to results_list
-                for item in results['tracks']:
-                    item = s.tidal_to_songs_dict(item)
+                for result in results['tracks']:
+                    item = s.tidal_to_songs_dict(result)
                     if item not in results_list:
                         results_list.append(item)
 
@@ -546,6 +554,7 @@ def run(settings_dict, **kwargs):
                 if duplicate:
                     continue
 
+                # Search for song on Tidal
                 id, confidence = s.search(song)
 
                 if id in existing_tracks:
@@ -555,8 +564,12 @@ def run(settings_dict, **kwargs):
                     ids.append(id)
                 else:
                     log.debug(
-                        f"Could not find song '{song['title']}' in Tidal; will not add to playlist."
+                        f"Could not find song '{song['title'] if 'title' in song else song}' in Tidal; "
+                        "will not add to playlist."
                     )
+                    if filename := os.environ.get("TIDAL_NOT_FOUND_FILE"):
+                        with open(filename, "a") as f:
+                            f.write(f"{playlist['name']}: {song}\n")
 
             if settings_dict["existing_playlists"] == "Update":
                 # Remove any songs which aren't in `uris` from the playlist
