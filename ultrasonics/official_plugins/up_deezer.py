@@ -304,8 +304,15 @@ def run(settings_dict, **kwargs):
 
             # Convert from Deezer API format to ultrasonics format
             log.info("Converting tracks to ultrasonics format.")
+            blLog = true
             for track in tqdm(tracks, desc=f"Converting tracks in {playlist_id}"):
                 try:
+                    
+                    if blLog:
+                        str_track = str(track)
+                        log.debug(f"DEEZER DEBUG | TRACK: \n {str_track}")
+                        blLog = false
+                        
                     track_list.append(self.deezer_to_songs_dict(result=track))
                 except UserWarning as e:
                     log.warning(
