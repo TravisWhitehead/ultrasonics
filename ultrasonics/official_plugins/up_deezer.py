@@ -248,13 +248,14 @@ def run(settings_dict, **kwargs):
                 if score > confidence:
                     matched_track = item
                     confidence = score
+                    
+                    str_item = str(item)
+                    log.debug(f"Result: {str_item} has score: {score} and confidence = {confidence}")
+                    
                     if confidence > 100:
                         break
 
             deezer_id = matched_track["id"]["deezer"]
-            str_item = str(matched_track)
-            log.info(f"Result: {str_item} has score: {score} and confidence = {confidence}")
-
             return deezer_id, confidence
 
         def list_playlists(self):
