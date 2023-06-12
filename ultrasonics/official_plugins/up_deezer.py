@@ -246,13 +246,14 @@ def run(settings_dict, **kwargs):
             for item in results_list:
                 confidence = 0
                 score = fuzzymatch.similarity(track, item)
-                
-                str_item = str(item)
-                log.info(f"Result: {str_item} has score: {score} and confidence = {confidence}")
-                
+
                 if score > confidence:
                     matched_track = item
                     confidence = score
+                    
+                    str_item = str(item)
+                    log.info(f"Result: {str_item} has score: {score} and confidence = {confidence}")
+                    
                     if confidence > 100:
                         break
 
