@@ -186,6 +186,9 @@ def similarity(a, b):
 
             results["artist"] = fuzz.partial_token_sort_ratio(
                 artists_a, artists_b)
+            
+            if cleaned_b == "call me":
+                log.debug(f"Compared \n {artists_a} \n with \n {artists_b} \n Score {results[key]}")
         except KeyError:
             pass
 
