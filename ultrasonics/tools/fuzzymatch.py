@@ -190,9 +190,9 @@ def similarity(a, b):
     if isrc_match:
         weight = {
             "isrc": 10,
-            "title": 3,
-            "artist": 3,
-            "album": 1,
+            "title": 8,
+            "artist": 8,
+            "album": 2,
             "date": 1
         }
     else:
