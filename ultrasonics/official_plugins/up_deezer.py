@@ -487,7 +487,7 @@ def run(settings_dict, **kwargs):
 
                 try:
                     deezer_id, confidence = dz.search(song)
-                    debug.log(f"SEARCH RETURNED: {deezer_id} with confidence: {confidence}")
+                    log.debug(f"SEARCH RETURNED: {deezer_id} with confidence: {confidence}")
                 except UserWarning:
                     # Likely no data was returned
                     log.warning(
@@ -495,7 +495,7 @@ def run(settings_dict, **kwargs):
                     continue
 
                 if deezer_id in existing_ids:
-                    debug.log(f"EXISTING ID!!")
+                    log.debug(f"EXISTING ID!!")
                     duplicate_ids.append(deezer_id)
 
                 if confidence > float(database.get("fuzzy_ratio") or 90):
