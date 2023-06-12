@@ -166,9 +166,6 @@ def similarity(a, b):
                 cutoff_regex[1], " ", cleaned_b, flags=re.IGNORECASE).strip().lower()
 
             results[key] = fuzz.ratio(cleaned_a, cleaned_b)
-            if cleaned_b == "call me":
-                log.debug(f"Compared \n {cleaned_a} \n with \n {cleaned_b} \n Score {results[key]}")
-
         except KeyError:
             pass
 
@@ -186,9 +183,6 @@ def similarity(a, b):
 
             results["artist"] = fuzz.partial_token_sort_ratio(
                 artists_a, artists_b)
-            
-            if cleaned_b == "call me":
-                log.debug(f"Compared \n {artists_a} \n with \n {artists_b} \n Score {results[key]}")
         except KeyError:
             pass
 
@@ -217,12 +211,7 @@ def similarity(a, b):
     for key in weight.keys():
         if key in results.keys():
             corrector += weight[key]
-            
-    if cleaned_b == "call me":
-        log.debug(f"Results: \n {str_results}")
-        str_weight = str(weight)
-        log.debug(f"Weight: \n {str_weight}")
-    
+             
     if corrector == 0:
         return False
 
