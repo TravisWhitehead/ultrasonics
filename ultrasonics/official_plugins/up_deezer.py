@@ -232,8 +232,6 @@ def run(settings_dict, **kwargs):
                     # Convert to ultrasonics format and append to results_list
                     for result in results:
                         str_result = str(result)
-                        #log.debug(f"Deezer result: \n {str_result}")
-                        
                         result = self.deezer_to_songs_dict(result=result)
                         if result not in results_list:
                             results_list.append(result)
@@ -250,14 +248,11 @@ def run(settings_dict, **kwargs):
                 if score > confidence:
                     matched_track = item
                     confidence = score
-                    
-                    str_item = str(item)
-                    log.info(f"Result: {str_item} has score: {score} and confidence = {confidence}")
-                    
                     if confidence > 100:
                         break
 
             deezer_id = matched_track["id"]["deezer"]
+            str_item = str(matched_track)
             log.info(f"Result: {str_item} has score: {score} and confidence = {confidence}")
 
             return deezer_id, confidence
@@ -492,6 +487,7 @@ def run(settings_dict, **kwargs):
 
                 try:
                     deezer_id, confidence = dz.search(song)
+                    debug.log(f"SEARCH RETURNED: {deezer_id} with confidence: {confidence}")
                 except UserWarning:
                     # Likely no data was returned
                     log.warning(
@@ -499,6 +495,7 @@ def run(settings_dict, **kwargs):
                     continue
 
                 if deezer_id in existing_ids:
+                    debug.log(f"EXISTING ID!!")
                     duplicate_ids.append(deezer_id)
 
                 if confidence > float(database.get("fuzzy_ratio") or 90):
