@@ -165,7 +165,6 @@ def run(settings_dict, **kwargs):
             # 2. Other fields
             # Multiple searches are made as Deezer is more likely to return false negative (missing songs)
             # than false positive, when specifying many query parameters.
-
             results_list = []
 
             try:
@@ -186,11 +185,9 @@ def run(settings_dict, **kwargs):
                 try:
                     title = re.sub(cutoff_regex[0], "",
                                    track['title'], flags=re.IGNORECASE) + "\n"
-                    log.debug(f"DEBUG | TITLE FIRST: \n {title}")
 
                     title = re.sub(cutoff_regex[1], " ",
                                    title, flags=re.IGNORECASE).strip()
-                    log.debug(f"DEBUG | TITLE SECOND: \n {title}")
                 except KeyError:
                     pass
 
@@ -219,9 +216,6 @@ def run(settings_dict, **kwargs):
                 url = "https://api.deezer.com/search"
 
                 for query in queries:
-                    str_query = str(query)
-                    log.info(f"Searching for {str_query}")
-                    
                     params = {
                         "q": query,
                         "limit": 50
@@ -247,13 +241,9 @@ def run(settings_dict, **kwargs):
                 score = fuzzymatch.similarity(track, item)
 
                 if score > confidence:
-                    log.debug(f"SCORE ({score}) > CONFIDENCE ({confidence}")
                     matched_track = item
                     confidence = score
-                    
-                    str_item = str(item)
-                    log.debug(f"Result: {str_item} has score: {score} and confidence = {confidence}")
-                    
+                   
                     if confidence > 100:
                         break
 
@@ -490,7 +480,7 @@ def run(settings_dict, **kwargs):
 
                 try:
                     deezer_id, confidence = dz.search(song)
-                    log.debug(f"SEARCH RETURNED: {deezer_id} with confidence: {confidence}")
+                    log.info(f"Searched Deezer, found match: {deezer_id} with confidence: {confidence}")
                 except UserWarning:
                     # Likely no data was returned
                     log.warning(
@@ -498,7 +488,6 @@ def run(settings_dict, **kwargs):
                     continue
 
                 if deezer_id in existing_ids:
-                    log.debug(f"EXISTING ID!!")
                     duplicate_ids.append(deezer_id)
 
                 if confidence > float(database.get("fuzzy_ratio") or 90):
