@@ -311,7 +311,7 @@ def run(settings_dict, **kwargs):
                     if blLog:
                         str_track = str(track)
                         log.debug(f"DEEZER DEBUG | TRACK: \n {str_track}")
-                        blLog = false
+                        blLog = False
                         
                     track_list.append(self.deezer_to_songs_dict(result=track))
                 except UserWarning as e:
