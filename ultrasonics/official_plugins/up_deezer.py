@@ -481,7 +481,6 @@ def run(settings_dict, **kwargs):
 
                 try:
                     deezer_id, confidence = dz.search(song)
-                    log.info(f"Searched Deezer, found match: {deezer_id} with confidence: {confidence}")
                 except UserWarning:
                     # Likely no data was returned
                     log.warning(
