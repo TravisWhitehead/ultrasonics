@@ -423,8 +423,9 @@ def run(settings_dict, **kwargs):
                     f"Playlist {playlist['name']} already exists, updating that one.")
             else:
                 # Playlist must be created
-                str_pl = str(current_playlists)
-                log.debug(f"DEBUG CURRENT PLAYLISTS \n {str_pl}")
+                for dw_item in current_playlists:
+                    log.debug(f"DEBUG {playlist['name']} ITEM {dw_item['title']} \n")
+                    
                 log.info(
                     f"Playlist {playlist['name']} does not exist, creating it now...")
 
