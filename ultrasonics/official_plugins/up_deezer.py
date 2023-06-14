@@ -424,7 +424,7 @@ def run(settings_dict, **kwargs):
             else:
                 # Playlist must be created
                 for dw_item in current_playlists:
-                    log.debug(f"DEBUG {playlist['name']} ITEM {dw_item['title']} \n")
+                    log.debug(f"DEBUG |{playlist['name']}| ITEM |{dw_item['title']}| \n")
                     
                 log.info(
                     f"Playlist {playlist['name']} does not exist, creating it now...")
