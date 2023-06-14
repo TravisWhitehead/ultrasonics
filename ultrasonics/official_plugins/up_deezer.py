@@ -346,6 +346,9 @@ def run(settings_dict, **kwargs):
                 track = self.api(url)
 
             artists = [item["name"] for item in track["contributors"]]
+            if len(artists) > 1:
+                str_artists = str(artists)
+                log.debug(f"DEEZER DEBUG: ARTISTS \n {str_artists}")
 
             try:
                 album = track["album"]["title"]
