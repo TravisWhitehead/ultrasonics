@@ -386,11 +386,16 @@ def run(settings_dict, **kwargs):
 
             # Convert from Spotify API format to ultrasonics format
             log.info("Converting tracks to ultrasonics format.")
+                
             for track in tqdm(
                 [track["track"] for track in tracks],
                 desc=f"Converting tracks in {playlist_id}",
             ):
                 try:
+                    if playlist_id == "37i9dQZF1DX2fMaj5GfMh3":
+                        str_track = str(track)
+                        log.debug(f"DEBUG TRACK: \n {str_track}")
+
                     track_list.append(s.spotify_to_songs_dict(track))
                 except TypeError:
                     log.error(
