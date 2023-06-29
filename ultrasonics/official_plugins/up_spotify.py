@@ -392,14 +392,15 @@ def run(settings_dict, **kwargs):
                 desc=f"Converting tracks in {playlist_id}",
             ):
                 try:
-                    if playlist_id == "37i9dQZF1DX2fMaj5GfMh3":
-                        str_track = str(track)
-                        log.debug(f"DEBUG TRACK: \n {str_track}")
-
                     track_list.append(s.spotify_to_songs_dict(track))
                 except TypeError:
                     log.error(
                         f"Could not convert track {track['id']} to ultrasonics format."
+                    )
+                    continue
+                except AttributeError:
+                    log.error(
+                        f"Could not convert track to ultrasonics format. Received empty track."
                     )
                     continue
 
