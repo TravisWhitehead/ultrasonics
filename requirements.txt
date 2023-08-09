@@ -1,14 +1,14 @@
 # Main Program
 Flask~=2.3.2
-Flask-SocketIO~=5.3.4
+Flask-SocketIO~=5.3.5
 eventlet~=0.33.3
 
 # Included Plugins
 mutagen~=1.46.0
 requests~=2.31.0
-rapidfuzz~=3.1.1
-python-Levenshtein~=0.21.0
+rapidfuzz~=3.2.0
+python-Levenshtein~=0.21.1
 spotipy~=2.23.0
-tqdm~=4.65.0
-PlexAPI~=4.14.0
-tidalapi~=0.7.1
+tqdm~=4.65.2
+PlexAPI~=4.15.0
+tidalapi~=0.7.2
