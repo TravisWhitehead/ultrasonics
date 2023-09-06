@@ -19,6 +19,7 @@ It goes without saying that inaccurate music tags (such as from local files) may
 XDGFX, 2020
 """
 
+import datetime
 import re
 
 from rapidfuzz import fuzz, process
@@ -80,7 +81,7 @@ def duplicate(song, song_list, threshold):
                            flags=re.IGNORECASE).strip()
                 str_a = str(a)
                 str_b = str(b)
-                
+
                 results[key] = fuzz.ratio(a, b)
 
         # Date score
@@ -172,7 +173,16 @@ def similarity(a, b):
     if not isrc_match:
         # Date score
         try:
-            results["date"] = fuzz.token_set_ratio(a["date"], b["date"])
+            a_date = a["date"]
+            b_date = b["date"]
+
+            # XXX: Dates from spotify & this output for tidal may not be in the same format.
+            if isinstance(a["date"], datetime.datetime):
+                a_date = a["date"].strftime("%Y-%m-%d")
+            if isinstance(b["date"], datetime.datetime):
+                b_date = b["date"].strftime("%Y-%m-%d")
+
+            results["date"] = fuzz.token_set_ratio(a_date, b_date)
         except KeyError:
             pass
 
@@ -186,7 +196,7 @@ def similarity(a, b):
         except KeyError:
             pass
 
-    
+
     if isrc_match:
         weight = {
             "isrc": 10,
@@ -206,12 +216,12 @@ def similarity(a, b):
 
     # Fix weightings if values are missing
     str_results = str(results)
-    
+
     corrector = 0
     for key in weight.keys():
         if key in results.keys():
             corrector += weight[key]
-             
+
     if corrector == 0:
         return False
 
